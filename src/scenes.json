@@ -2,8 +2,21 @@
 	"0": {
 		"text": "Hello, world",
 		"actions": [{
-			"text": "Click me",
-			"scene": "1"
-		}]
+				"text": "Click me",
+				"scene": "0",
+				"variables": [{
+					"key": "test",
+					"value": "temp"
+				}]
+			},
+			{
+				"text": "Seems gut",
+				"scene": "0",
+				"conditions": [{
+					"key": "test",
+					"value": "temp"
+				}]
+			}
+		]
 	}
 }

@@ -20,7 +20,7 @@ class Game extends Component {
 		let action = this.state.scene.actions[index];
 		
 		if (action.variables !== undefined) {
-			for (let keyvaluepair in action.variables) {
+			for (let keyvaluepair of action.variables) {
 				this.variables[keyvaluepair.key] = keyvaluepair.value;
 			}
 		}
@@ -37,7 +37,7 @@ class Game extends Component {
 
 	renderAction(action, index) {
 		if (action.conditions !== undefined) {
-			for (let keyvaluepair in action.conditions) {
+			for (let keyvaluepair of action.conditions) {
 				if (this.variables[keyvaluepair.key] !== keyvaluepair.value) {
 					return null;
 				}
