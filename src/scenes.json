@@ -1,0 +1,9 @@
+{
+	"0": {
+		"text": "Hello, world",
+		"actions": [{
+			"text": "Click me",
+			"scene": "1"
+		}]
+	}
+}

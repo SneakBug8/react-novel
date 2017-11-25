@@ -1,43 +1,68 @@
 import React, { Component } from 'react';
 import './App.css';
+import autoBind from 'react-autobind';
 
 class Game extends Component {
 	constructor() {
-		this.scenes = require('scenes.json');
+		super();
+
+		this.scenes = require('./scenes.json');
 		this.state = {
-			scene = this.scenes[0]
+			scene: this.scenes['0']
 		};
+
+		this.variables = [];
+
+		autoBind(this); 
 	}
 
 	onClick(index) {
 		let action = this.state.scene.actions[index];
-
-		if (action.scene != undefined) {
+		
+		if (action.variables !== undefined) {
+			for (let keyvaluepair in action.variables) {
+				this.variables[keyvaluepair.key] = keyvaluepair.value;
+			}
+		}
+		if (action.scene !== undefined) {
 			this.changeScene(action.scene);
 		}
 	}
 
 	changeScene(scenename) {
 		let state = this.state;
-		state.scene = this.scenes[scenename]
+		state.scene = this.scenes[scenename];
 		this.setState(state);
 	}
 
-  	render() {
-		let actions = this.state.scene.actions.map((action, index) =>
-			<li onClick={this.onClick(index)}> {this.action.text} </li>
-	);
+	renderAction(action, index) {
+		if (action.conditions !== undefined) {
+			for (let keyvaluepair in action.conditions) {
+				if (this.variables[keyvaluepair.key] !== keyvaluepair.value) {
+					return null;
+				}
+			}
+		}
+		return (<li onClick={() => this.onClick(index)} key={index}> {action.text} </li>);
+	}
 
-    return (
-		<div>
+	render() {
+		let scene = this.state.scene;
+		let actions = scene.actions.map(this.renderAction);
+
+		return (
 			<div>
-				<p>{this.scene.text}</p>
+				<div>
+					<p>{scene.text}</p>
+				</div>
+				<div>
+					<ul>
+						{actions}
+					</ul>
+				</div>
 			</div>
-			<div>
-			</div>
-		</div>
-    );
-  }
+		);
+	}
 }
 
 export default Game;
