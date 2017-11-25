@@ -18,5 +18,12 @@
 				}]
 			}
 		]
+	},
+	"1": {
+		"text": "Test me pleaze",
+		"actions": [{
+			"text": "Tornare",
+			"scene": "0"
+		}]
 	}
 }
