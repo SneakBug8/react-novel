@@ -11,7 +11,7 @@
 			},
 			{
 				"text": "Seems gut",
-				"scene": "0",
+				"scene": "1",
 				"conditions": [{
 					"key": "test",
 					"value": "temp"
